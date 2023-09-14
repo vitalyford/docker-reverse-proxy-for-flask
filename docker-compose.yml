@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nginx-jupyter:
+    restart: "always"
+    build: .
+    container_name: "nginx-reverse-proxy-for-flask"
+    environment:
+      PORT: 80
+      VIRTUAL_PORT: 80
+      VIRTUAL_HOST: DOMAIN.com
+      LETSENCRYPT_HOST: DOMAIN.com
+      LETSENCRYPT_EMAIL: user@email.com
+    networks:
+      - letsencrypt
+
+networks:
+  letsencrypt:
+    external: true
